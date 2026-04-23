@@ -59,6 +59,7 @@ void* messageListener(void *arg) {
 	while(1){
 		read(fd, &incomingMsg, sizeof(struct message));
 		printf("Incoming message from %s: %s\n", incomingMsg.source, incomingMsg.msg);
+		fflush(stdout);
 	}
 
 

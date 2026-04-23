@@ -31,7 +31,9 @@ int main() {
 	while (1) {
 		// TODO:
 		// read requests from serverFIFO
-		int bytesRead = read(server, &req, sizeof(struct message));
+		if (read(server, &req, sizeof(struct message)) != sizeof(struct message)) {
+			continue;
+		}
 
 
 

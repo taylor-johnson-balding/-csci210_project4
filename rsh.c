@@ -59,7 +59,6 @@ void* messageListener(void *arg) {
 	while(1){
 		read(fd, &incomingMsg, sizeof(struct message));
 		printf("Incoming message from %s: %s\n", incomingMsg.source, incomingMsg.msg);
-		fflush(stdout);
 	}
 
 
@@ -143,7 +142,7 @@ int main(int argc, char **argv) {
 		}
 		int skip = strlen("sendmsg ") + strlen(targetUser)+1;
 		char *msg = line2 + skip;
-		if (msg == NULL){
+		if (*msg == '\0'){
 			printf("sendmsg: you have to enter a message\n");
 			continue;
 		}
@@ -221,5 +220,6 @@ int main(int argc, char **argv) {
 	posix_spawnattr_destroy(&attr);
 
     }
+    pthread_join(tid, NULL);
     return 0;
 }

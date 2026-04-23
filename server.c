@@ -31,6 +31,8 @@ int main() {
 	while (1) {
 		// TODO:
 		// read requests from serverFIFO
+		int bytesRead = read(server, &req, sizeof(struct message));
+
 
 
 
@@ -42,7 +44,9 @@ int main() {
 		// TODO:
 		// open target FIFO and write the whole message struct to the target FIFO
 		// close target FIFO after writing the message
-
+		target = open(req.target, O_WRONLY);
+		write(target, &req, sizeof(struct message));
+		close(target);
 
 
 
